@@ -11,7 +11,7 @@
                 <v-btn :to="{name: 'imagenes'}">Imagenes</v-btn>
                 <v-btn :to="{name: 'videos'}">Videos</v-btn>
                 <v-btn :to="{name: 'texto'}">Textos</v-btn>
-                <v-btn :to="{name: 'crear'}">Crear</v-btn>
+                <v-btn v-if="typeUser=='admin' || typeUser =='writer'" :to="{name: 'crear'}">Crear</v-btn>
             </div>
             <v-spacer></v-spacer>
             <LoginMenu />
@@ -21,7 +21,7 @@
 <script>
 import LoginMenu from './LoginMenu.vue';
 import { useRoute, useRouter } from 'vue-router';
-
+import {getTypeUserLogged} from '@/util/session'
 export default {
     components: {
         LoginMenu
@@ -29,6 +29,7 @@ export default {
     setup(){
         const route = useRoute();
         const router = useRouter();
+        const typeUser = getTypeUserLogged()
 
 
         //methods
@@ -38,7 +39,8 @@ export default {
 
         return{
             navigateBack,
-            route
+            route,
+            typeUser
         }
     }
 }
