@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify'
 import router from './plugins/router'
 import pinia from './plugins/pinia'
 import emitter from './plugins/mitt'
+import './plugins/axios'
 
 const app = createApp(App)
 app.config.globalProperties.emitter = emitter

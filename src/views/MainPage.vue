@@ -1,6 +1,7 @@
 <template>
     <div>
     <AppBar />
+    <router-view></router-view>
     </div>
 </template>
 <script>
