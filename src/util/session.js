@@ -11,7 +11,7 @@ const getSession = () => {
 const getIdUserLogged = () => {
     const session = JSON.parse(localStorage.getItem("sessionUser"));
     if(session){
-        return session.id;
+        return session.fullName;
     }
 }
 

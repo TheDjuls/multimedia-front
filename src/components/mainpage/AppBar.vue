@@ -8,9 +8,10 @@
             <v-spacer></v-spacer>
             <div v-if="route.name !='inicio'">
                 <v-btn :to="{name: 'list'}">Buscar</v-btn>
-                <v-btn to="">Imagenes</v-btn>
-                <v-btn>Videos</v-btn>
-                <v-btn>Textos</v-btn>
+                <v-btn :to="{name: 'imagenes'}">Imagenes</v-btn>
+                <v-btn :to="{name: 'videos'}">Videos</v-btn>
+                <v-btn :to="{name: 'texto'}">Textos</v-btn>
+                <v-btn :to="{name: 'crear'}">Crear</v-btn>
             </div>
             <v-spacer></v-spacer>
             <LoginMenu />

@@ -2,13 +2,19 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Inicio from './../views/MainPage.vue'
 
 const ListContent = () => import('./../views/ListContent.vue')
+const CategoryView = () => import('./../views/CategoryView.vue')
+const CrearView = () => import('./../views/CrearView.vue')
 
 
 const routes = [
   {
     path: '/', name: 'inicio', component: Inicio, 
     children: [
-      {path: '/list', name: 'list', component: ListContent}
+      {path: '/list', name: 'list', component: ListContent},
+      {path: '/images', name: 'imagenes', component: CategoryView},
+      {path: '/videos', name: 'videos', component: CategoryView},
+      {path: '/textos', name: 'texto', component: CategoryView},
+      {path: '/crear', name: 'crear', component: CrearView}
     ]
   },
 ]
