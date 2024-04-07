@@ -176,7 +176,7 @@ export default {
                 login()
                 console.log(response.data)
             } catch (error) {
-                alert("Ha ocurrido un error al registrarse")
+                alert("Ha ocurrido un error al registrarse:"+ error.response.data.error)
                 console.log(error)
             }
 
