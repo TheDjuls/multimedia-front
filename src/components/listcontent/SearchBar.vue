@@ -41,7 +41,6 @@ export default {
         }
 
         const doSearch = async () => {
-            console.log(payloadSearch.value)
             emitter.emit("searchContent", (payloadSearch.value.search ? payloadSearch.value.search : payloadSearch.value.theme))
         }
 

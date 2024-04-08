@@ -55,13 +55,6 @@
                             <v-btn variant="text" icon="mdi-logout" @click="logout"></v-btn>
                         </template>
                     </v-list-item>
-                    <v-list-item to="/configs" class="cursor-pointer">
-                        <template v-slot:prepend>
-                            <v-icon icon="mdi-cog"></v-icon>
-                        </template>
-
-                        <v-list-item-title> Administracion</v-list-item-title>
-                    </v-list-item>
                     <v-list-item to="/list" class="cursor-pointer">
                         <template v-slot:prepend>
                             <v-icon icon="mdi-note"></v-icon>
@@ -82,6 +75,7 @@ import { email, required, minLength, maxLength, requiredIf } from '@vuelidate/va
 import { useVuelidate } from '@vuelidate/core'
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import emitter from '@/plugins/mitt';
 
 
 export default {
@@ -134,16 +128,17 @@ export default {
 
         const updateDataSession = () => {
             usuarioLogged.value = JSON.parse(localStorage.getItem("sessionUser"))
-            console.log(usuarioLogged.value)
+
             if (!usuarioLogged.value ||Object.keys(usuarioLogged.value).length === 0) {
                 usuarioLogged.value = null
             }
-            console.log(usuarioLogged.value)
+
         }
 
         const setSession = (user) => {
             localStorage.setItem('sessionUser', JSON.stringify(user));
             updateDataSession()
+            emitter.emit("updateAppBar")
         }
 
         const login = async () => {
@@ -155,7 +150,7 @@ export default {
                 const response = await axios.post("login", payload)
                 setSession(response.data);
                 router.push({name:'list'})
-                console.log(response.data)
+
             } catch (error) {
                 alert("Ha ocurrido un error al iniciar sesion")
                 console.log(error)
@@ -163,7 +158,6 @@ export default {
         }
 
         const registerNewUser = async () => {
-            console.log(userPayload)
             const payload = {
                 "fullName": userPayload.fullName,
                 "type": userPayload.type,
@@ -174,7 +168,7 @@ export default {
             try {
                 const response = await axios.post("users", payload)
                 login()
-                console.log(response.data)
+
             } catch (error) {
                 alert("Ha ocurrido un error al registrarse:"+ error.response.data.error)
                 console.log(error)

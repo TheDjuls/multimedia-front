@@ -22,6 +22,8 @@
 import LoginMenu from './LoginMenu.vue';
 import { useRoute, useRouter } from 'vue-router';
 import {getTypeUserLogged} from '@/util/session'
+import { onMounted, ref } from 'vue';
+import emitter from '@/plugins/mitt';
 export default {
     components: {
         LoginMenu
@@ -29,13 +31,24 @@ export default {
     setup(){
         const route = useRoute();
         const router = useRouter();
-        const typeUser = getTypeUserLogged()
+        const typeUser = ref(null) 
 
 
         //methods
         const navigateBack = () => {
             router.back()
         }
+
+        const updateAppBar = () => {
+            typeUser.value = getTypeUserLogged()
+        }
+
+        onMounted(()=> {
+            typeUser.value = getTypeUserLogged()
+            emitter.on("updateAppBar", ()=> {
+                updateAppBar()
+            })
+        })
 
         return{
             navigateBack,

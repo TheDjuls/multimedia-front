@@ -33,10 +33,10 @@ export default {
         const getListAllContent = async () => {
             try {
                 const response = await axios.get("contents")
-                console.log(response)
                 listadoBusqueda.value = response.data
             } catch (error) {
                 console.log(error)
+                alert("Ha ocurrido un error al recuperar los contenidos")
             }
         }
 
@@ -45,7 +45,6 @@ export default {
                 const response = await axios.post("contents/search",{
                     search: searchkey
                 })
-                console.log(response)
                 listadoBusqueda.value = response.data
             } catch (error) {
                 console.log(error)

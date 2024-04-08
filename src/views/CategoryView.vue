@@ -34,9 +34,7 @@ export default {
             }
         }
 
-        watch(() => route.name, (newPath, oldPath) => {
-            console.log('Ruta anterior:', oldPath);
-            console.log('Nueva ruta:', newPath);
+        watch(() => route.name, (newPath) => {
             getCategory(newPath)
         });
 
